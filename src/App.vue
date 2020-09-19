@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <Toolbar />
+
+    <v-main>
+      <Search v-on:searchResult="searchResult" />
+      <Mostrar v-bind:items="items" />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Toolbar from "./components/Toolbar";
+import Search from "./components/Search";
+import Mostrar from "./components/Mostrar";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
+  name: "App",
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  components: {
+    Toolbar,
+    Search,
+    Mostrar,
+  },
+  methods: {
+    searchResult(response) {
+      this.items = response;
+    },
+  },
+  data() {
+    return {
+      items: [],
+    };
+  },
+};
+</script>
